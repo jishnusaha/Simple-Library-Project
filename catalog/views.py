@@ -1,14 +1,15 @@
 import datetime
+from pprint import pprint
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.utils.translation import gettext as _
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 from catalog.models import Book, Author, BookInstance, Genre
 
@@ -44,12 +45,20 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
-    paginate_by = 3
+
 
 
 class UserListView(generic.ListView):
     model = User
-    paginate_by = 3
+
+    def get_queryset(self):
+
+        group = Group.objects.get(name='Library Member')
+        users = group.user_set.all()
+
+        return users
+
+
 
 
 class UserDetailView(generic.DetailView):
@@ -69,6 +78,10 @@ class LibraryUserCreateView(generic.CreateView):
     model = User
     fields = ['password', 'groups', 'username', 'first_name', 'last_name']
 
+    def form_valid(self, form):
+        self.object = form.save()
+
+        return redirect('library-user-detail', pk=self.object.id)
 
 class BookInstanceCreateView(generic.CreateView):
     model = BookInstance
@@ -79,7 +92,6 @@ class BookInstanceCreateView(generic.CreateView):
 
 class AuthorListView(generic.ListView):
     model = Author
-    paginate_by = 5
 
 
 class AuthorDetailView(generic.DetailView):

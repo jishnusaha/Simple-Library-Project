@@ -5,13 +5,28 @@
 
   {% if user_list %}
 
-  <ul>
-    {% for user in user_list %}
-      <li>
-        <a href="{% url 'library-user-detail' pk=user.id %}">{{ user.username }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">User Name</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Borrowed Book</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for user in user_list %}
+
+            <tr>
+              <td><a href="{% url 'library-user-detail' pk=user.id %}">{{ user.username }}</a></td>
+              <td>{{ user.first_name }}</td>
+              <td>{{ user.last_name }}</td>
+              <td>{{ user.bookinstance_set.count }}</td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+
   {% else %}
     <p>There are no library user in the library.</p>
   {% endif %}       

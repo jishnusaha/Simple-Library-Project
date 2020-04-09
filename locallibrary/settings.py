@@ -120,11 +120,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATICFILES_DIRS = [
-    "/static/",
+    "static/",
 ]
 STATIC_URL = '/static/'
 
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

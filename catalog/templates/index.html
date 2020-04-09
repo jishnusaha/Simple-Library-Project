@@ -1,9 +1,19 @@
 {% extends "base_generic.html" %}
-
+{% load static %}
 {% block content %}
   <h1>Local Library Home</h1>
-  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
-  <h2>Dynamic content</h2>
+  <p>Welcome to LocalLibrary, a website developed by Jishnu Saha!
+      <a href="https://www.linkedin.com/in/jishnu-saha-14332a152/" style = "text-decoration: none">
+          <img src="{% static 'pic/linkedin.jpg' %}" alt="LinkedIn" width="20" height="20">
+
+      </a>
+      <a href="https://github.com/jishnusaha" style = "text-decoration: none">
+          <img src="{% static 'pic/github.png' %}" alt="LinkedIn" width="20" height="20" >
+
+      </a>
+
+  </p>
+  <h2>Basic Informations</h2>
   <p>The library has the following record counts:</p>
   <ul>
     <li><strong>Books:</strong> {{ num_books }}</li>
@@ -13,4 +23,5 @@
   </ul>
 
     <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+
 {% endblock %}

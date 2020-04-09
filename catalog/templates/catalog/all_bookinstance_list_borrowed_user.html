@@ -3,18 +3,51 @@
 {% block content %}
     <h1>All Borrowed books</h1>
 
+
     {% if bookinstance_list %}
+        <table class="table">
+      <thead>
+        <tr>
+{#          <th scope="col">#</th>#}
+          <th scope="col">Book Name</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">Borrower</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bookinst in bookinstance_list %}
 
-    <ul>
+        <tr>
+{#          <th scope="row">1</th>#}
+          <td>
+              <a href="{% url 'book-detail' bookinst.book.pk %}" style = "text-decoration: none">{{bookinst.book.title}} </a>
+          </td>
+          <td>
+              <div class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+              {{ bookinst.due_back }}
+              </div>
+          </td>
+          <td>
+              <a href="{% url 'library-user-detail' pk=bookinst.borrower.id %}" style = "text-decoration: none">
+                  {% if bookinst.borrower.first_name %}
 
-      {% for bookinst in bookinstance_list %} 
-      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})
-        (<a href="{% url 'renew-book-librarian' bookinst.id%}"> Renew</a>)
-      </li>
+                      {{ bookinst.borrower.first_name }}
+                      {{ bookinst.borrower.last_name }}
+                  {% else %}
+                        {{ bookinst.borrower.username }}
+                  {% endif %}
+              </a>
+          </td>
+          <td>
+              <a href="{% url 'renew-book-librarian' bookinst.id%}"> Renew</a>
+          </td>
+        </tr>
+        {% endfor %}
 
-      {% endfor %}
-    </ul>
+      </tbody>
+    </table>
+
 
     {% else %}
       <p>There are no books borrowed.</p>

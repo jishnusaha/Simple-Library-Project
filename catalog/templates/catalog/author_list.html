@@ -3,19 +3,46 @@
 {% block content %}
   <h1>Author List</h1>
   {% if author_list %}
-  <ul>
-    {% for author in author_list %}
-      <li>
+    <table class="table">
+      <thead>
+        <tr>
 
-        <a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a>
-          {% if author.date_of_death %}
-              ({{author.date_of_birth }} - {{ author.date_of_death }})
-          {% else %}
-              ({{author.date_of_birth }} - {{ 'Present' }})
-          {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+          <th scope="col">Name</th>
+          <th scope="col">Date Of Birth</th>
+          <th scope="col">Date Of Death</th>
+          <th scope="col">Total Book</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for author in author_list %}
+        <tr>
+          <td><a href="{{ author.get_absolute_url }}" style="text-decoration: none">{{ author.first_name }} {{ author.last_name }}</a></td>
+          <td>
+              {% if author.date_of_birth %}
+                  {{ author.date_of_birth }}
+              {% else %}
+                  -
+              {% endif %}
+
+          </td>
+          <td>
+              {% if author.date_of_birth %}
+                  {{ author.date_of_death }}
+
+              {% else %}
+                  -
+              {% endif %}
+
+          </td>
+          <td>
+              {{ author.book_set.count }}
+          </td>
+
+        </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
   {% else %}
     <p>There are no author in the library.</p>
   {% endif %}
