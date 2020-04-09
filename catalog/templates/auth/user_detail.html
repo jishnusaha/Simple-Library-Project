@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% block content %}
+
+
+  <p><strong>First Name:</strong> {{ user.first_name }}</p>
+  <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+  <p><strong>User Name</strong> {{ user.username }}</p>
+
+
+  <div style="margin-left:20px;margin-top:20px">
+{#    <h4>Copies</h4>#}
+
+{#    {% for copy in author.authorinstance_set.all %}#}
+{#      <hr>#}
+{#      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">#}
+{#        {{ copy.get_status_display }}#}
+{#      </p>#}
+{#      {% if copy.status != 'a' %}#}
+{#        <p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>#}
+{#      {% endif %}#}
+{#      <p><strong>Imprint:</strong> {{ copy.imprint }}</p>#}
+{#      <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>#}
+{#    {% endfor %}#}
+  </div>
+
+    <a href="{% url "library-user-list" %}">User List</a>
+{% endblock %}

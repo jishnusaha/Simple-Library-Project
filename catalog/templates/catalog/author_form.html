@@ -1,0 +1,21 @@
+{% extends 'base_generic.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% block content %}
+    <h1>Create Author</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6">
+        {{ form.first_name|as_crispy_field }}
+          {{ form.last_name|as_crispy_field }}
+
+        {{ form.date_of_birth|as_crispy_field }}
+        {{ form.date_of_death|as_crispy_field }}
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Author</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base_generic.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% block content %}
+    <h1>Create Book</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6">
+        {{ form.title|as_crispy_field }}
+          {{ form.author|as_crispy_field }}
+
+        {{ form.summary|as_crispy_field }}
+        {{ form.isbn|as_crispy_field }}
+        {{ form.genre|as_crispy_field }}
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Book</button>
+  </form>
+{% endblock %}

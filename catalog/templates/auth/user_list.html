@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Library User List</h1>
+
+  {% if user_list %}
+
+  <ul>
+    {% for user in user_list %}
+      <li>
+        <a href="{% url 'library-user-detail' pk=user.id %}">{{ user.username }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no library user in the library.</p>
+  {% endif %}       
+{% endblock %}

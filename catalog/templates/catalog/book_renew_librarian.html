@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+
+{% block content %}
+  <h1>Renew: {{ book_instance.book.title }}</h1>
+  <p>Borrower: {{ book_instance.borrower }}</p>
+  <p{% if book_instance.is_overdue %} class="text-danger"{% endif %}>Due date: {{ book_instance.due_back }}</p>
+    
+  <form action="" method="post">
+  {% csrf_token %}
+  <div class="row">
+      <div class="col-6">
+
+    {{ form |crispy}}
+{#          {{ form.date_of_birth|as_crispy_field }}#}
+
+    </div>
+  </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+      </br>
+    <a href="{% url 'all-borrowed' %}">Borrowed Books</a>
+
+
+  </form>
+{% endblock %}

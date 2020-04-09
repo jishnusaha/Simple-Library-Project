@@ -1,0 +1,10 @@
+venv/
+.idea/
+*.pyc
+*.cfg
+# Serverless directories
+.serverless
+node_modules/
+local_settings.yml
+local_settings.py
+.coverage
