@@ -47,7 +47,6 @@ class BookListView(generic.ListView):
     model = Book
 
 
-
 class UserListView(generic.ListView):
     model = User
 
@@ -57,8 +56,6 @@ class UserListView(generic.ListView):
         users = group.user_set.all()
 
         return users
-
-
 
 
 class UserDetailView(generic.DetailView):
@@ -87,7 +84,10 @@ class BookInstanceCreateView(generic.CreateView):
     model = BookInstance
     fields = ['book', 'imprint']
 
-    success_url = "/"
+    def form_valid(self, form):
+        self.object = form.save()
+
+        return redirect('book-detail', pk=self.object.book_id)
 
 
 class AuthorListView(generic.ListView):

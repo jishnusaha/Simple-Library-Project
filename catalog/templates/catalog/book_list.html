@@ -4,14 +4,39 @@
   <h1>Book List</h1>
 
   {% if book_list %}
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Book Name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Available</th>
+          <th scope="col">On Loan</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in book_list %}
 
-  <ul>
-    {% for book in book_list %}
-      <li>
-        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
-      </li>
-    {% endfor %}
-  </ul>
+        <tr>
+          <td>
+              <a href="{{ book.get_absolute_url }}" style="text-decoration: none">{{ book.title }}</a>
+          </td>
+          <td>
+              <a href="{% url 'author-detail' pk=book.author_id %} ">{{ book.author.first_name }} {{ book.author.last_name }} </a>
+          </td>
+          <td>
+
+          </td>
+          <td>
+
+          </td>
+
+
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
   {% else %}
     <p>There are no books in the library.</p>
   {% endif %}       
