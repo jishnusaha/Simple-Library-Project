@@ -8,3 +8,8 @@ node_modules/
 local_settings.yml
 local_settings.py
 .coverage
+
+# Text backup files
+*.bak
+
+# Database
